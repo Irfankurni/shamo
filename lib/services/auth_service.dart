@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:shamo/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  String baseUrl = 'https://shamostore.my.id/api';
+  String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<UserModel?> register({
     String? name,
@@ -31,7 +32,6 @@ class AuthService {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
       user.token = 'Bearer ' + data['access_token'];
-
       return user;
     } else {
       throw Exception('Gagal Register');
@@ -42,6 +42,7 @@ class AuthService {
     String? email,
     String? password,
   }) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var url = Uri.parse('$baseUrl/login');
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
@@ -61,7 +62,6 @@ class AuthService {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
       user.token = 'Bearer ' + data['access_token'];
-
       return user;
     } else {
       throw Exception('Gagal Login');

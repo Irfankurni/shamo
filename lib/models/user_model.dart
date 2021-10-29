@@ -4,7 +4,7 @@ class UserModel {
   String? username;
   String? email;
   late String profilePhotoUrl;
-  String? token;
+  late String token;
 
   UserModel({
     this.id,
@@ -12,7 +12,7 @@ class UserModel {
     this.username,
     this.email,
     required this.profilePhotoUrl,
-    this.token,
+    required this.token,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
