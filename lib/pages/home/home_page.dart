@@ -4,14 +4,14 @@ import 'package:shamo/models/user_model.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widget/product_card.dart';
-import 'package:shamo/widget/product_tile.dart';
+import 'package:shamo/widgets/product_card.dart';
+import 'package:shamo/widgets/product_tile.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel? user = authProvider.user;
+    UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
 
     Widget header() {
@@ -28,9 +28,11 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${user!.name}',
+                    'Hallo, ${user.name}',
                     style: primaryTextStyle.copyWith(
-                        fontSize: 24, fontWeight: semiBold),
+                      fontSize: 24,
+                      fontWeight: semiBold,
+                    ),
                   ),
                   Text(
                     '@${user.username}',
@@ -47,7 +49,9 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: NetworkImage(user.profilePhotoUrl),
+                  image: NetworkImage(
+                    user.profilePhotoUrl,
+                  ),
                 ),
               ),
             ),
@@ -73,9 +77,7 @@ class HomePage extends StatelessWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                margin: EdgeInsets.only(
-                  right: 16,
-                ),
+                margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: primaryColor,
@@ -93,13 +95,11 @@ class HomePage extends StatelessWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                margin: EdgeInsets.only(
-                  right: 16,
-                ),
+                margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                   color: transparentColor,
                 ),
@@ -116,13 +116,11 @@ class HomePage extends StatelessWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                margin: EdgeInsets.only(
-                  right: 16,
-                ),
+                margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                   color: transparentColor,
                 ),
@@ -139,13 +137,11 @@ class HomePage extends StatelessWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                margin: EdgeInsets.only(
-                  right: 16,
-                ),
+                margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                   color: transparentColor,
                 ),
@@ -162,13 +158,11 @@ class HomePage extends StatelessWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                margin: EdgeInsets.only(
-                  right: 16,
-                ),
+                margin: EdgeInsets.only(right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                   color: transparentColor,
                 ),
@@ -205,7 +199,7 @@ class HomePage extends StatelessWidget {
 
     Widget popularProducts() {
       return Container(
-        margin: EdgeInsets.only(top: 12),
+        margin: EdgeInsets.only(top: 14),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

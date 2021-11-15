@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widget/loading_button.dart';
+import 'package:shamo/widgets/loading_button.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -36,18 +35,19 @@ class _SignUpPageState extends State<SignUpPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        Navigator.pushNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
             content: Text(
-              'Gagal Register',
+              'Gagal Register!',
               textAlign: TextAlign.center,
             ),
           ),
         );
       }
+
       setState(() {
         isLoading = false;
       });
@@ -70,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 2,
             ),
             Text(
-              'Register and Happy Shopping',
+              'Register and Happy Shoping',
               style: subtitleTextStyle,
             ),
           ],
@@ -86,8 +86,10 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text(
               'Full Name',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -113,8 +115,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: nameController,
                         style: primaryTextStyle,
+                        controller: nameController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Full Name',
                           hintStyle: subtitleTextStyle,
@@ -138,8 +140,10 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text(
               'Username',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -165,8 +169,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: usernameController,
                         style: primaryTextStyle,
+                        controller: usernameController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Username',
                           hintStyle: subtitleTextStyle,
@@ -190,8 +194,10 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text(
               'Email Address',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -217,8 +223,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: emailController,
                         style: primaryTextStyle,
+                        controller: emailController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Email Address',
                           hintStyle: subtitleTextStyle,
@@ -242,8 +248,10 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text(
               'Password',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -269,9 +277,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: passwordController,
                         style: primaryTextStyle,
                         obscureText: true,
+                        controller: passwordController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Password',
                           hintStyle: subtitleTextStyle,
@@ -313,7 +321,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget footer() {
       return Container(
-        margin: EdgeInsets.only(bottom: 30, top: 50),
+        margin: EdgeInsets.only(bottom: 30),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -325,7 +333,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/sign-in');
+                Navigator.pop(context);
               },
               child: Text(
                 'Sign In',
@@ -341,14 +349,15 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor1,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               header(),
               nameInput(),
@@ -356,6 +365,7 @@ class _SignUpPageState extends State<SignUpPage> {
               emailInput(),
               passwordInput(),
               isLoading ? LoadingButton() : signUpButton(),
+              Spacer(),
               footer(),
             ],
           ),

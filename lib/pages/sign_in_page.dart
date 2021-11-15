@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widget/loading_button.dart';
+import 'package:shamo/widgets/loading_button.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -29,18 +29,19 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        Navigator.pushNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
             content: Text(
-              'Gagal Login',
+              'Gagal Login!',
               textAlign: TextAlign.center,
             ),
           ),
         );
       }
+
       setState(() {
         isLoading = false;
       });
@@ -63,7 +64,7 @@ class _SignInPageState extends State<SignInPage> {
               height: 2,
             ),
             Text(
-              'Sign In to Countinue',
+              'Sign In to Continue',
               style: subtitleTextStyle,
             ),
           ],
@@ -79,8 +80,10 @@ class _SignInPageState extends State<SignInPage> {
           children: [
             Text(
               'Email Address',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -106,8 +109,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: emailController,
                         style: primaryTextStyle,
+                        controller: emailController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Email Address',
                           hintStyle: subtitleTextStyle,
@@ -131,8 +134,10 @@ class _SignInPageState extends State<SignInPage> {
           children: [
             Text(
               'Password',
-              style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
             SizedBox(
               height: 12,
@@ -158,9 +163,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: passwordController,
                         style: primaryTextStyle,
                         obscureText: true,
+                        controller: passwordController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Password',
                           hintStyle: subtitleTextStyle,
@@ -230,8 +235,8 @@ class _SignInPageState extends State<SignInPage> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor1,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(

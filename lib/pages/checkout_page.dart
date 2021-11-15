@@ -4,12 +4,12 @@ import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/providers/cart_provider.dart';
 import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widget/checkout_card.dart';
-import 'package:shamo/widget/loading_button.dart';
+import 'package:shamo/widgets/checkout_card.dart';
+import 'package:shamo/widgets/loading_button.dart';
 
 class CheckoutPage extends StatefulWidget {
   @override
-  State<CheckoutPage> createState() => _CheckoutPageState();
+  _CheckoutPageState createState() => _CheckoutPageState();
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
@@ -28,7 +28,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
 
       if (await transactionProvider.checkout(
-        authProvider.user!.token,
+        authProvider.user.token,
         cartProvider.carts,
         cartProvider.totalPrice(),
       )) {
@@ -42,12 +42,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
     }
 
-    PreferredSizeWidget header() {
+    Widget header() {
       return AppBar(
         backgroundColor: backgroundColor1,
-        centerTitle: true,
-        title: Text('Checkout Details'),
         elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Checkout Details',
+        ),
       );
     }
 
@@ -57,7 +59,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           horizontal: defaultMargin,
         ),
         children: [
-          //List Items
+          // NOTE: LIST ITEMS
           Container(
             margin: EdgeInsets.only(
               top: defaultMargin,
@@ -82,9 +84,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ],
             ),
           ),
-          //Address Details
+
+          // NOTE: ADDRESS DETAILS
           Container(
-            margin: EdgeInsets.only(top: defaultMargin),
+            margin: EdgeInsets.only(
+              top: defaultMargin,
+            ),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: backgroundColor4,
@@ -94,9 +99,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Your Address Details',
+                  'Address Details',
                   style: primaryTextStyle.copyWith(
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: medium,
                   ),
                 ),
@@ -157,15 +162,18 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
-          //Payment Summary
+
+          // NOTE: PAYMENT SUMMARY
           Container(
-            margin: EdgeInsets.only(top: defaultMargin),
+            margin: EdgeInsets.only(
+              top: defaultMargin,
+            ),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: backgroundColor4,
@@ -196,7 +204,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     Text(
                       '${cartProvider.totalItems()} Items',
                       style: primaryTextStyle.copyWith(
-                        fontSize: 14,
                         fontWeight: medium,
                       ),
                     ),
@@ -217,7 +224,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     Text(
                       '\$${cartProvider.totalPrice()}',
                       style: primaryTextStyle.copyWith(
-                        fontSize: 14,
                         fontWeight: medium,
                       ),
                     ),
@@ -238,7 +244,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     Text(
                       'Free',
                       style: primaryTextStyle.copyWith(
-                        fontSize: 14,
                         fontWeight: medium,
                       ),
                     ),
@@ -274,9 +279,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ],
             ),
           ),
-          //Checkout Button
+
+          // NOTE: CHECKOUT BUTTON
           SizedBox(
-            height: 30,
+            height: defaultMargin,
           ),
           Divider(
             thickness: 1,
@@ -284,7 +290,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
           isLoading
               ? Container(
-                  margin: EdgeInsets.only(bottom: defaultMargin),
+                  margin: EdgeInsets.only(
+                    bottom: 30,
+                  ),
                   child: LoadingButton(),
                 )
               : Container(

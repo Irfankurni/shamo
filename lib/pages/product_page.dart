@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/product_model.dart';
+import 'package:shamo/pages/detail_chat_page.dart';
 import 'package:shamo/providers/cart_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
 import 'package:shamo/theme.dart';
@@ -23,11 +24,13 @@ class _ProductPageState extends State<ProductPage> {
 
   List familiarShoes = [
     'assets/image_shoes.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
+    'assets/image_shoes2.png',
+    'assets/image_shoes3.png',
+    'assets/image_shoes4.png',
+    'assets/image_shoes5.png',
+    'assets/image_shoes6.png',
+    'assets/image_shoes7.png',
+    'assets/image_shoes8.png',
   ];
 
   int currentIndex = 0;
@@ -118,11 +121,11 @@ class _ProductPageState extends State<ProductPage> {
 
     Widget indicator(int index) {
       return Container(
+        width: currentIndex == index ? 16 : 4,
+        height: 4,
         margin: EdgeInsets.symmetric(
           horizontal: 2,
         ),
-        width: currentIndex == index ? 16 : 4,
-        height: 4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: currentIndex == index ? primaryColor : Color(0xffC4C4C4),
@@ -139,7 +142,7 @@ class _ProductPageState extends State<ProductPage> {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(imageUrl),
+            image: AssetImage(imageUrl),
           ),
           borderRadius: BorderRadius.circular(6),
         ),
@@ -179,7 +182,7 @@ class _ProductPageState extends State<ProductPage> {
             items: widget.product.galleries
                 .map(
                   (image) => Image.network(
-                    image.url!,
+                    image.url,
                     width: MediaQuery.of(context).size.width,
                     height: 310,
                     fit: BoxFit.cover,
@@ -204,7 +207,7 @@ class _ProductPageState extends State<ProductPage> {
               index++;
               return indicator(index);
             }).toList(),
-          )
+          ),
         ],
       );
     }
@@ -213,30 +216,24 @@ class _ProductPageState extends State<ProductPage> {
       int index = -1;
 
       return Container(
-        margin: EdgeInsets.only(
-          top: 17,
-        ),
         width: double.infinity,
+        margin: EdgeInsets.only(top: 17),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(24),
           ),
           color: backgroundColor1,
         ),
-        //HEADER
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            // NOTE: HEADER
             Container(
               margin: EdgeInsets.only(
+                top: defaultMargin,
                 left: defaultMargin,
                 right: defaultMargin,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Column(
@@ -250,7 +247,7 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                         Text(
-                          widget.product.category.name!,
+                          widget.product.category.name,
                           style: secondaryTextStyle.copyWith(
                             fontSize: 12,
                           ),
@@ -267,7 +264,7 @@ class _ProductPageState extends State<ProductPage> {
                           SnackBar(
                             backgroundColor: secondaryColor,
                             content: Text(
-                              'Has been added to Wishlist',
+                              'Has been added to the Wishlist',
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -277,7 +274,7 @@ class _ProductPageState extends State<ProductPage> {
                           SnackBar(
                             backgroundColor: alertColor,
                             content: Text(
-                              'Has been removed from Wishlist',
+                              'Has been removed from the Wishlist',
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -294,7 +291,8 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             ),
-            //PRICE
+
+            // NOTE: PRICE
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(
@@ -304,8 +302,8 @@ class _ProductPageState extends State<ProductPage> {
               ),
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
                 color: backgroundColor2,
+                borderRadius: BorderRadius.circular(4),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -324,7 +322,8 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             ),
-            //DESCIPTION
+
+            // NOTE: DESCRIPTION
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(
@@ -354,7 +353,8 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             ),
-            //FAMILIAR SHOES
+
+            // NOTE: FAMILIAR SHOES
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(
@@ -368,7 +368,7 @@ class _ProductPageState extends State<ProductPage> {
                       horizontal: defaultMargin,
                     ),
                     child: Text(
-                      'Familiar Shoes',
+                      'Fimiliar Shoes',
                       style: primaryTextStyle.copyWith(
                         fontWeight: medium,
                       ),
@@ -380,19 +380,21 @@ class _ProductPageState extends State<ProductPage> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: widget.product.galleries.map((image) {
+                      children: familiarShoes.map((image) {
                         index++;
                         return Container(
-                            margin: EdgeInsets.only(
-                                left: index == 0 ? defaultMargin : 0),
-                            child: familiarShoesCard(image.url!));
+                          margin: EdgeInsets.only(
+                              left: index == 0 ? defaultMargin : 0),
+                          child: familiarShoesCard(image),
+                        );
                       }).toList(),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
-            //Button
+
+            // NOTE: BUTTONS
             Container(
               width: double.infinity,
               margin: EdgeInsets.all(defaultMargin),
@@ -400,14 +402,21 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail-chat');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailChatPage(widget.product),
+                        ),
+                      );
                     },
                     child: Container(
                       width: 54,
                       height: 54,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/button_chat.png'),
+                          image: AssetImage(
+                            'assets/button_chat.png',
+                          ),
                         ),
                       ),
                     ),
@@ -438,7 +447,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

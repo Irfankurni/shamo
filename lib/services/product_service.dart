@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shamo/models/product_model.dart';
 
@@ -7,7 +6,7 @@ class ProductService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<List<ProductModel>> getProducts() async {
-    var url = Uri.parse('$baseUrl/products');
+    var url = '$baseUrl/products';
     var headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(url, headers: headers);
@@ -24,7 +23,7 @@ class ProductService {
 
       return products;
     } else {
-      throw Exception('Gagal Get Products');
+      throw Exception('Gagal Get Products!');
     }
   }
 }

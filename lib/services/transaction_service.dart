@@ -1,34 +1,33 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:shamo/models/cart_model.dart';
-import 'package:shamo/models/product_model.dart';
+import '../models/cart_model.dart';
 
 class TransactionService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<bool> checkout(
       String token, List<CartModel> carts, double totalPrice) async {
-    var url = Uri.parse('$baseUrl/checkout');
+    var url = '$baseUrl/checkout';
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
     };
-
-    var body = jsonEncode({
-      'address': 'Marsemoon',
-      'items': carts
-          .map(
-            (cart) => {
-              'id': cart.product.id,
-              'quantity': cart.quantity,
-            },
-          )
-          .toList(),
-      'status': "PENDING",
-      'total_price': totalPrice,
-      'shipping_price': 0,
-    });
+    var body = jsonEncode(
+      {
+        'address': 'Marsemoon',
+        'items': carts
+            .map(
+              (cart) => {
+                'id': cart.product.id,
+                'quantity': cart.quantity,
+              },
+            )
+            .toList(),
+        'status': "PENDING",
+        'total_price': totalPrice,
+        'shipping_price': 0,
+      },
+    );
 
     var response = await http.post(
       url,
@@ -41,7 +40,7 @@ class TransactionService {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw Exception('Gagal Melakukan Transaksi');
+      throw Exception('Gagal Melakukan Checkout!');
     }
   }
 }

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
 
 class CheckoutSuccessPage extends StatelessWidget {
-  const CheckoutSuccessPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    PreferredSizeWidget header() {
+    Widget header() {
       return AppBar(
         backgroundColor: backgroundColor1,
         centerTitle: true,
-        title: Text('Checkout Success'),
+        title: Text(
+          'Checkout Success',
+        ),
         elevation: 0,
-        automaticallyImplyLeading: false,
       );
     }
 
@@ -39,12 +38,12 @@ class CheckoutSuccessPage extends StatelessWidget {
               height: 12,
             ),
             Text(
-              'Stay at home while we \nprepare your dream shoes',
+              'Stay at home while we\nprepare your dream shoes',
               style: secondaryTextStyle,
               textAlign: TextAlign.center,
             ),
             Container(
-              width: 194,
+              width: 196,
               height: 44,
               margin: EdgeInsets.only(
                 top: defaultMargin,
@@ -70,7 +69,7 @@ class CheckoutSuccessPage extends StatelessWidget {
               ),
             ),
             Container(
-              width: 194,
+              width: 196,
               height: 44,
               margin: EdgeInsets.only(
                 top: 12,

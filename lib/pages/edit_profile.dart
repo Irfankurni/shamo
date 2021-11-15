@@ -5,12 +5,10 @@ import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
 class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel? user = authProvider.user;
+    UserModel user = authProvider.user;
 
     PreferredSizeWidget header() {
       return AppBar(
@@ -55,11 +53,11 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: user!.name,
+                hintText: user.name,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                 ),
               ),
@@ -86,11 +84,11 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: '@${user!.username}',
+                hintText: '@${user.username}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                 ),
               ),
@@ -117,11 +115,11 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: user!.email,
+                hintText: user.email,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: subtitleTextColor,
+                    color: subtitleColor,
                   ),
                 ),
               ),
@@ -150,7 +148,7 @@ class EditProfilePage extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(user!.profilePhotoUrl),
+                  image: NetworkImage(user.profilePhotoUrl),
                 ),
               ),
             ),

@@ -1,28 +1,28 @@
 import 'package:shamo/models/category_model.dart';
-
-import 'gallery_model.dart';
+import 'package:shamo/models/gallery_model.dart';
 
 class ProductModel {
-  late int id;
-  late String name;
-  late double price;
-  late String description;
-  String? tags;
-  late CategoryModel category;
-  late DateTime createdAt;
-  late DateTime updatedAt;
-  late List<GalleryModel> galleries;
+  int id;
+  String name;
+  double price;
+  String description;
+  String tags;
+  CategoryModel category;
+  DateTime createdAt;
+  DateTime updatedAt;
+  List<GalleryModel> galleries;
 
-  ProductModel(
-      {required this.id,
-      required this.name,
-      required this.price,
-      required this.description,
-      this.tags,
-      required this.category,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.galleries});
+  ProductModel({
+    this.id,
+    this.name,
+    this.price,
+    this.description,
+    this.tags,
+    this.category,
+    this.createdAt,
+    this.updatedAt,
+    this.galleries,
+  });
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -46,9 +46,11 @@ class ProductModel {
       'description': description,
       'tags': tags,
       'category': category.toJson(),
-      'gallery': galleries.map((gallery) => gallery.toJson()).toList(),
-      'createdAt': createdAt.toString(),
-      'updatedAt': updatedAt.toString(),
+      'galleries': galleries.map((gallery) => gallery.toJson()).toList(),
+      'created_at': createdAt.toString(),
+      'updated_at': updatedAt.toString(),
     };
   }
 }
+
+class UninitializedProductModel extends ProductModel {}

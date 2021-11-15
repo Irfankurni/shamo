@@ -1,11 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/theme.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
-
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -15,9 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      getInit();
-    });
+    getInit();
 
     super.initState();
   }

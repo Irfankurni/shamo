@@ -6,12 +6,10 @@ import 'package:shamo/providers/auth_provider.dart';
 import '../../theme.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel? user = authProvider.user;
+    UserModel user = authProvider.user;
 
     Widget header() {
       return AppBar(
@@ -27,7 +25,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 ClipOval(
                   child: Image.network(
-                    user!.profilePhotoUrl,
+                    user.profilePhotoUrl,
                     width: 64,
                   ),
                 ),
@@ -41,7 +39,9 @@ class ProfilePage extends StatelessWidget {
                       Text(
                         'Hallo, ${user.name}',
                         style: primaryTextStyle.copyWith(
-                            fontSize: 24, fontWeight: semiBold),
+                          fontSize: 24,
+                          fontWeight: semiBold,
+                        ),
                       ),
                       Text(
                         '@${user.username}',
@@ -71,17 +71,13 @@ class ProfilePage extends StatelessWidget {
 
     Widget menuItem(String text) {
       return Container(
-        margin: EdgeInsets.only(
-          top: 16,
-        ),
+        margin: EdgeInsets.only(top: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               text,
-              style: secondaryTextStyle.copyWith(
-                fontSize: 13,
-              ),
+              style: secondaryTextStyle.copyWith(fontSize: 13),
             ),
             Icon(
               Icons.chevron_right,
@@ -95,8 +91,10 @@ class ProfilePage extends StatelessWidget {
     Widget content() {
       return Expanded(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: defaultMargin,
+          ),
           decoration: BoxDecoration(
             color: backgroundColor3,
           ),
@@ -117,12 +115,18 @@ class ProfilePage extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(context, '/edit-profile');
                 },
-                child: menuItem('Edit Profile'),
+                child: menuItem(
+                  'Edit Profile',
+                ),
               ),
-              menuItem('Your Guides'),
-              menuItem('Help'),
+              menuItem(
+                'Your Orders',
+              ),
+              menuItem(
+                'Help',
+              ),
               SizedBox(
-                height: 16,
+                height: 30,
               ),
               Text(
                 'General',
@@ -131,9 +135,15 @@ class ProfilePage extends StatelessWidget {
                   fontWeight: semiBold,
                 ),
               ),
-              menuItem('Privacy & Policy'),
-              menuItem('Term of Services'),
-              menuItem('Rate App'),
+              menuItem(
+                'Privacy & Policy',
+              ),
+              menuItem(
+                'Term of Service',
+              ),
+              menuItem(
+                'Rate App',
+              ),
             ],
           ),
         ),

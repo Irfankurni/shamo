@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/providers/cart_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widget/cart_card.dart';
+import 'package:shamo/widgets/cart_card.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
-    PreferredSizeWidget header() {
+    Widget header() {
       return AppBar(
         backgroundColor: backgroundColor1,
         centerTitle: true,
-        title: Text('Your Cart'),
+        title: Text(
+          'Your Cart',
+        ),
         elevation: 0,
       );
     }
@@ -33,7 +33,7 @@ class CartPage extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Opps! Your Cart is Empty',
+              'Opss! Your Cart is Empty',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: medium,
@@ -50,7 +50,7 @@ class CartPage extends StatelessWidget {
               width: 154,
               height: 44,
               margin: EdgeInsets.only(
-                top: defaultMargin,
+                top: 20,
               ),
               child: TextButton(
                 onPressed: () {
@@ -121,7 +121,7 @@ class CartPage extends StatelessWidget {
             ),
             Divider(
               thickness: 0.3,
-              color: subtitleTextColor,
+              color: subtitleColor,
             ),
             SizedBox(
               height: 30,
@@ -137,11 +137,11 @@ class CartPage extends StatelessWidget {
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
                   padding: EdgeInsets.symmetric(
                     horizontal: 20,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: Row(
@@ -161,7 +161,7 @@ class CartPage extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       );

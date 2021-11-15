@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo/providers/page_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
-import 'package:shamo/widget/wishlist_card.dart';
+import 'package:shamo/widgets/wishlist_card.dart';
 
 import '../../theme.dart';
 
 class WishlistPage extends StatelessWidget {
-  const WishlistPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
 
-    PreferredSizeWidget header() {
-      return PreferredSize(
-        preferredSize: Size.fromHeight(70),
-        child: AppBar(
-          backgroundColor: backgroundColor1,
-          centerTitle: true,
-          title: Text('Favorite Shoes'),
-          elevation: 0,
-          automaticallyImplyLeading: false,
+    Widget header() {
+      return AppBar(
+        backgroundColor: backgroundColor1,
+        centerTitle: true,
+        title: Text(
+          'Favorite Shoes',
         ),
+        elevation: 0,
+        automaticallyImplyLeading: false,
       );
     }
 
@@ -41,7 +40,7 @@ class WishlistPage extends StatelessWidget {
                 height: 23,
               ),
               Text(
-                'You don\'t have dream shoes?',
+                ' You don\'t have dream shoes?',
                 style: primaryTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: medium,
@@ -61,12 +60,12 @@ class WishlistPage extends StatelessWidget {
                 height: 44,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/home');
+                    pageProvider.currentIndex = 0;
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 24,
                       vertical: 10,
+                      horizontal: 24,
                     ),
                     backgroundColor: primaryColor,
                     shape: RoundedRectangleBorder(
@@ -91,14 +90,15 @@ class WishlistPage extends StatelessWidget {
     Widget content() {
       return Expanded(
         child: Container(
-          width: double.infinity,
           color: backgroundColor3,
           child: ListView(
             padding: EdgeInsets.symmetric(
               horizontal: defaultMargin,
             ),
             children: wishlistProvider.wishlist
-                .map((product) => WishlistCard(product))
+                .map(
+                  (product) => WishlistCard(product),
+                )
                 .toList(),
           ),
         ),
@@ -108,6 +108,7 @@ class WishlistPage extends StatelessWidget {
     return Column(
       children: [
         header(),
+        // emptyWishlist(),
         wishlistProvider.wishlist.length == 0 ? emptyWishlist() : content(),
       ],
     );
