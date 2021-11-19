@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo/providers/category_provider.dart';
 import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/theme.dart';
 
@@ -22,6 +23,7 @@ class _SplashPageState extends State<SplashPage> {
 
   getInit() async {
     await Provider.of<ProductProvider>(context, listen: false).getProducts();
+    // await Provider.of<CategoryProvider>(context, listen: false).getCategories();
     Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
   }
 
