@@ -1,5 +1,12 @@
 # Shamo
 
+## Development Setup
+Clone the repository and run the following commands:
+```
+flutter pub get
+flutter run
+```
+
 ## Screenshot
 ![Sign In](https://user-images.githubusercontent.com/19315474/159656511-3b98ef66-090d-4902-ba49-fa8dc9c423b5.png) ![Sign Up](https://user-images.githubusercontent.com/19315474/159656663-eca70018-8d48-4aca-bff0-34cadfedc0ac.png) 
 ![Home - Running](https://user-images.githubusercontent.com/19315474/159656967-5088d98e-0c9c-41eb-a610-a3f5c5bccb63.png) ![Detail Barang - Fimiliar Shoes Slide](https://user-images.githubusercontent.com/19315474/159656654-7eaf3735-6ece-4291-b233-47ef470cfb72.png)
