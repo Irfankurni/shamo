@@ -16,12 +16,6 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  List images = [
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes.png',
-  ];
-
   List familiarShoes = [
     'assets/image_shoes.png',
     'assets/image_shoes2.png',
